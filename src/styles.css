@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+.toggle-sidebar {
+  display: none;
+  transition: all 0.8s;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+label {
+  font-weight: 500;
+}
+
+@media screen and (max-width: 576px) {
+
+}

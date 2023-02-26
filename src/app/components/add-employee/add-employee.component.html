@@ -1,0 +1,75 @@
+<div class="main-container d-flex">
+  <app-sidebar [employeeToEdit$]="employeeToEdit$"></app-sidebar>
+  <div class="content">
+    <div class="top-line"></div>
+    <div class="container pt-4 px-5">
+      <div class="card col-sm-5 col-lg-3" (click)="hideSideBar()">
+        <div class="card-body">
+          <h6 class="card-subtitle mb-2 text-muted">Ajout Utilisateur</h6>
+          <form [formGroup]='addEmployeeForm'>
+            <div class="form-group">
+              <label for="name">NOM</label>
+              <input formControlName='name' type="text" class="form-control" id="name" name="name">
+              <div class="pt-1" *ngIf="addEmployeeForm.controls['name'].invalid
+                                        && (addEmployeeForm.controls['name'].dirty||
+                                        addEmployeeForm.controls['name'].touched)">
+                <div *ngIf="addEmployeeForm.controls['name'].errors?.['required']" style="color: red;">
+                  This field is mandatory.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="surname">PRENOM</label>
+              <input formControlName='surname' type="text" class="form-control" id="surname" name="surname">
+              <div class="pt-1" *ngIf="addEmployeeForm.controls['surname'].invalid
+                                        && (addEmployeeForm.controls['surname'].dirty||
+                                        addEmployeeForm.controls['surname'].touched)">
+                <div *ngIf="addEmployeeForm.controls['surname'].errors?.['required']" style="color: red;">
+                  This field is mandatory.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="years">Nombre d’années</label>
+              <input formControlName='years' type="number" min="0" class="form-control" id="years" name="years">
+              <div class="pt-1" *ngIf="addEmployeeForm.controls['years'].invalid
+                                        && (addEmployeeForm.controls['years'].dirty||
+                                        addEmployeeForm.controls['years'].touched)">
+                <div *ngIf="addEmployeeForm.controls['years'].errors?.['required']" style="color: red;">
+                  This field is mandatory.
+                </div>
+              </div>
+            </div>
+            <button (click)='addEmployee(addEmployeeForm.value)'
+                    [disabled]="!(addEmployeeForm.valid && addEmployeeForm.dirty)" type="submit"
+                    class="btn btn-success">Add
+            </button>
+          </form>
+        </div>
+      </div>
+      <hr/>
+      <div>
+        <h5>Liste des Utilisateurs</h5>
+        <div class="group-btn">
+          <div class="col-auto">
+            <button (click)="cancel()" type="button" class="btn btn-danger me-1"><i class="fa fa-times"></i> Cancel
+            </button>
+          </div>
+          <div class="col-auto">
+            <button (click)="save()" type="button" class="btn btn-success me-1"><i class="fa fa-save"></i> Save
+            </button>
+          </div>
+          <div class="col-auto">
+            <button (click)="load()" type="button" class="btn btn-primary"><i class="fa fa-spinner"></i> Load</button>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <app-employees-list [employeesList$]="employeesList$"
+                          [employeeYearsToEdit$]="employeeYearsToEdit$"
+                          (onselect)="deleteEmployee($event)"
+      ></app-employees-list>
+
+    </div>
+  </div>
+</div>
