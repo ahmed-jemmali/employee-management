@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DataService} from "../../services/data.service";
 import {BehaviorSubject} from "rxjs";
 import {Employee} from "../../models/employee";
+import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'app-add-employee',
@@ -46,10 +47,8 @@ export class AddEmployeeComponent implements OnInit {
     if (this.employeesList$.value && this.employeesList$.value.length > 0)
       value.id = this.employeesList$.value[this.employeesList$.value.length - 1].id + 1;
     else value.id = 1;
-    console.log(value)
     this.employeesList$.next(this.employeesList$.getValue().concat([value]));
     this.addEmployeeForm.reset();
-    this.employeesToDelete$.value.splice(0, this.employeesToDelete$.value.length);
   }
 
   cancel() {
@@ -62,10 +61,6 @@ export class AddEmployeeComponent implements OnInit {
 
   save() {
     //Add
-    console.log("this.employeeToEdit$", this.employeeToEdit$.value);
-    console.log("this.employeeYearsToEdit$", this.employeeYearsToEdit$.value)
-
-
     localStorage.setItem("employeesList", JSON.stringify(this.employeesList$.value));
 
     //Delete
@@ -124,6 +119,19 @@ export class AddEmployeeComponent implements OnInit {
 
   deleteEmployee(event: any) {
     this.employeesToDelete$.value.push(event);
-    console.log(this.employeesToDelete$.value)
+  }
+
+  showSideBar(employee: Employee, event: any) {
+    if (event.target && !event.target.classList.contains('delete-btn') && !event.target.classList.contains('fa-trash') && !(event.target.id == 'years')) {
+      this.dataService.employee$.next(employee);
+      if (document.getElementById("side_nav")!.classList.contains("toggle-sidebar"))
+        document.getElementById("side_nav")!.classList.remove("toggle-sidebar");
+    }
+    document.querySelector(".clicked")?.classList.remove('clicked');
+    document.getElementById(String(employee.id))?.classList.add('clicked');
+  }
+
+  drop(event: CdkDragDrop<BehaviorSubject<Employee[]>, any>) {
+    moveItemInArray(this.employeesList$.value, event.previousIndex, event.currentIndex)
   }
 }

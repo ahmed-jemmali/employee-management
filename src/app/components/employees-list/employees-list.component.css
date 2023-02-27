@@ -1,18 +1,7 @@
-.card {
-  margin-bottom: 20px;
-  margin-right: 20px;
-  background-color: #f8f9fa;
-}
-
 a {
   float: right;
 }
 
 form {
   clear: both;
-}
-
-.clicked, .card:hover {
-  background-color: #dcdfe3;
-  border: 2px solid #07b2d5;
 }

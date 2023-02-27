@@ -37,7 +37,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
           ...this.employeeToEdit$.value,
           name: this.editEmployeeForm.getRawValue().name,
         });
-        console.log(this.employeeToEdit$.value)
       });
     this.editEmployeeForm.controls["surname"].valueChanges
       .pipe(takeUntil(this.notifier))
@@ -46,10 +45,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
           ...this.employeeToEdit$.value,
           surname: this.editEmployeeForm.getRawValue().surname
         });
-        console.log(this.employeeToEdit$.value)
       });
-
-    console.log(this.employeeToEdit$.value)
   }
 
   ngOnDestroy(): void {
