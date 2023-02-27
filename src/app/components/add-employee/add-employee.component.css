@@ -1,0 +1,37 @@
+.top-line {
+  border-top: 8px solid #f8f9fa;
+}
+
+.card {
+  background-color: #f8f9fa;
+}
+
+app-employee-lists {
+  display: flex;
+}
+
+.group-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.content {
+  width: 100%;
+  min-width: 500px;
+}
+
+.card {
+  margin-bottom: 20px;
+  margin-right: 20px;
+  background-color: #f8f9fa;
+}
+
+.clicked, .card:hover:not(.add-card) {
+  background-color: #dcdfe3;
+  border: 2px solid #07b2d5;
+}
