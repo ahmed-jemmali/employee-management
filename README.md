@@ -1,2 +1,1 @@
-- if a card is modified and not yet saved it should be marked
-- if a card is deleted and not yet saved it should be marked
+
